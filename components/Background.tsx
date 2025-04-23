@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 
 interface Particle {
   x: number;
@@ -10,19 +10,6 @@ interface Particle {
   size: number;
   color: string;
   connections: number;
-}
-
-interface ParticleConfig {
-  particleCount: number;
-  particleBaseSize: number;
-  particleAddedSize: number;
-  particleBaseSpeed: number;
-  particleAddedSpeed: number;
-  particleVariance: number;
-  connectionDistance: number;
-  maxConnections: number;
-  baseColor: string;
-  addedColor: string;
 }
 
 interface CanvasSize {
@@ -53,7 +40,7 @@ const InteractiveBackground: React.FC = () => {
   };
   
   // Fonction pour initialiser les particules
-  const initialiseParticles = () => {
+  const initialiseParticles = useCallback(() => {
     if (!canvasRef.current) return;
     
     const newParticles: Particle[] = [];
@@ -89,10 +76,10 @@ const InteractiveBackground: React.FC = () => {
     }
     
     setParticles(newParticles);
-  };
+  }, [canvasSize, particleConfig.particleCount, particleConfig.particleBaseSize, particleConfig.particleAddedSize, particleConfig.particleBaseSpeed, particleConfig.particleAddedSpeed, particleConfig.particleVariance]);
   
   // Fonction pour connecter les particules entre elles
-  const connectParticles = (particle: Particle, ctx: CanvasRenderingContext2D) => {
+  const connectParticles = useCallback((particle: Particle, ctx: CanvasRenderingContext2D) => {
     particle.connections = 0;
     
     for (let i = 0; i < particles.length; i++) {
@@ -124,7 +111,7 @@ const InteractiveBackground: React.FC = () => {
         particle.connections++;
       }
     }
-  };
+  }, [particles, particleConfig.maxConnections, particleConfig.connectionDistance]);
   
   // Initialisation et gestion du redimensionnement
   useEffect(() => {
@@ -151,7 +138,7 @@ const InteractiveBackground: React.FC = () => {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [initialiseParticles]);
 
   // Animation des particules
   useEffect(() => {
@@ -207,7 +194,7 @@ const InteractiveBackground: React.FC = () => {
     return () => {
       cancelAnimationFrame(animationFrameId);
     };
-  }, [particles, canvasSize]);
+  }, [particles, canvasSize, connectParticles]);
 
   return (
     <canvas

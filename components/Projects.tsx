@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Github, ExternalLink, X, Code, LayoutDashboard, Layers, ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import BackButton from './BackButton';
@@ -219,42 +219,42 @@ const Projects: React.FC = () => {
   };
   
   // Fermer le modal de détail
-  const closeProjectDetails = () => {
+  const closeProjectDetails = useCallback(() => {
     setAnimating(true);
     setTimeout(() => {
       setSelectedProject(null);
       setAnimating(false);
     }, 300);
-  };
+  }, []);
 
   // Ouvrir la lightbox pour afficher une capture d'écran en plein écran
-  const openLightbox = (index: number, e: React.MouseEvent) => {
+  const openLightbox = useCallback((index: number, e: React.MouseEvent) => {
     e.stopPropagation();
     setCurrentScreenshotIndex(index);
     setLightboxOpen(true);
-  };
+  }, []);
 
   // Fermer la lightbox
-  const closeLightbox = () => {
+  const closeLightbox = useCallback(() => {
     setLightboxOpen(false);
-  };
+  }, []);
 
   // Navigation dans la lightbox
-  const nextScreenshot = () => {
+  const nextScreenshot = useCallback(() => {
     if (selectedProject?.screenshots) {
       setCurrentScreenshotIndex((prevIndex) => 
         (prevIndex + 1) % selectedProject.screenshots!.length
       );
     }
-  };
+  }, [selectedProject]);
 
-  const prevScreenshot = () => {
+  const prevScreenshot = useCallback(() => {
     if (selectedProject?.screenshots) {
       setCurrentScreenshotIndex((prevIndex) => 
         (prevIndex - 1 + selectedProject.screenshots!.length) % selectedProject.screenshots!.length
       );
     }
-  };
+  }, [selectedProject]);
 
   // Support clavier pour la navigation dans la lightbox
   React.useEffect(() => {
@@ -281,7 +281,7 @@ const Projects: React.FC = () => {
   }, [lightboxOpen, nextScreenshot, prevScreenshot, closeLightbox]);
 
   // Générer les classes pour la carte de projet
-  const getProjectCardClasses = (index: number) => {
+  const getProjectCardClasses = () => {
     // Animation décalée pour chaque carte
     return `bg-gray-800 rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-[1.02] transform cursor-pointer opacity-0 animate-fade-in-up`;
   };
@@ -292,12 +292,12 @@ const Projects: React.FC = () => {
       
       {/* Grille de projets */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {projects.map((project, index) => (
+        {projects.map((project, i) => (
           <div 
             key={project.id} 
-            className={getProjectCardClasses(index)}
+            className={getProjectCardClasses()}
             onClick={() => openProjectDetails(project)}
-            style={{ animationDelay: `${index * 150}ms` }}
+            style={{ animationDelay: `${i * 150}ms` }}
           >
             {/* Image ou dégradé du projet */}
             <div className={`h-48 bg-gradient-to-r ${project.gradientFrom} ${project.gradientTo} flex items-center justify-center relative overflow-hidden`}>
