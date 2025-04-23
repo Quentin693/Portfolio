@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Send, Phone, Mail, MapPin, Linkedin, Github, Twitter } from 'lucide-react';
+import { Send, Phone, Mail, MapPin, Linkedin, Github } from 'lucide-react';
 
 
 interface FormData {
@@ -54,7 +54,7 @@ const Contact: React.FC = () => {
         subject: '',
         message: ''
       });
-    } catch (error) {
+    } catch {
       setSubmitStatus({
         success: false,
         message: "Une erreur s'est produite lors de l'envoi du message."

@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { User, Phone, FolderOpen, Code, ArrowLeft, Home } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { User, Phone, FolderOpen, Code, Home } from 'lucide-react';
+import { motion } from 'framer-motion';
 import Contact from '../components/Contact';
 import About from '../components/About';
 import SkillsComponent from '../components/Skills';

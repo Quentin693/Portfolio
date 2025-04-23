@@ -112,19 +112,19 @@ const Projects: React.FC = () => {
   const projects: Project[] = [
     {
       id: 1,
-      title: "Site Internet Tiki Au bord de l'eau",
+      title: "Site Internet Tiki Au bord de l&apos;eau",
       description: "Un site internet pour un restaurant de cuisine traditionnelle française.",
       tags: ["React", "Nest.js", "PostgreSQL"],
       gradientFrom: "from-blue-500",
       gradientTo: "to-purple-600",
       githubUrl: "",
       imageUrl: "/projetTiki.png",
-      longDescription: "Un site internet pour un restaurant de cuisine traditionnelle française, avec une interface de connexion, une gestion de réservation en ligne, et une interface d'administration.",
+      longDescription: "Un site internet pour un restaurant de cuisine traditionnelle française, avec une interface de connexion, une gestion de réservation en ligne, et une interface d&apos;administration.",
       features: [
         "Authentification des utilisateurs avec JWT",
         "Gestion de réservation en ligne",
         "Interface de connexion",
-        "Interface d'administration complète"
+        "Interface d&apos;administration complète"
       ],
       technologies: [
         "Frontend: Next.js, Tailwind CSS",
@@ -150,14 +150,14 @@ const Projects: React.FC = () => {
     {
       id: 2,
       title: "Area",
-      description: "Site internet permettant l'automatisation de tâches un peu a la n8n",
+      description: "Site internet permettant l&apos;automatisation de tâches un peu à la n8n",
       tags: ["Nuxt.js", "Nest.js", "PostgreSQL"],
       gradientFrom: "from-green-500",
       gradientTo: "to-blue-600",
       githubUrl: "https://github.com/username/analytics-dashboard",
       demoUrl: "https://analytics-dashboard-demo.com",
       imageUrl: "/projetArea.png",
-      longDescription: "Site internet permettant l'automatisation de tâches un peu a la n8n",
+      longDescription: "Site internet permettant l&apos;automatisation de tâches un peu à la n8n",
       features: [
         "Graphiques interactifs et personnalisables",
         "Interface de connexion",
@@ -417,8 +417,8 @@ const Projects: React.FC = () => {
                     Fonctionnalités
                   </h4>
                   <ul className="space-y-2">
-                    {selectedProject.features.map((feature, index) => (
-                      <li key={index} className="flex items-start">
+                    {selectedProject.features.map((feature, i) => (
+                      <li key={i} className="flex items-start">
                         <span className="text-green-400 mr-2">•</span>
                         <span>{feature}</span>
                       </li>
@@ -508,19 +508,19 @@ const Projects: React.FC = () => {
       {/* Lightbox pour les captures d'écran */}
       {lightboxOpen && selectedProject?.screenshots && (
         <>
-            <Lightbox 
+          <Lightbox 
             screenshots={selectedProject.screenshots}
             currentIndex={currentScreenshotIndex}
             onClose={closeLightbox}
             onNext={nextScreenshot}
             onPrev={prevScreenshot}
-            />
-            <BackButton 
+          />
+          <BackButton 
             onClick={closeLightbox}
             className="absolute top-2 left-2 z-[70]"
-            />
+          />
         </>
-        )}
+      )}
       
       {/* Style pour l'animation */}
       <style jsx global>{`

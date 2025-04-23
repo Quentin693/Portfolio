@@ -256,7 +256,7 @@ const About: React.FC = () => {
 
         {/* Cartes de parcours */}
         <div className="space-y-24 relative">
-          {timelineItems.map((item, index) => (
+          {timelineItems.map((item) => (
             <div 
               key={item.id} 
               className={`relative flex justify-center ${item.type === 'education' ? 'md:justify-end' : 'md:justify-start'}`}
@@ -391,8 +391,8 @@ const About: React.FC = () => {
                     </div>
                   </h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {selectedItem.images.map((image, index) => (
-                      <div key={index} className="relative group">
+                    {selectedItem.images.map((image) => (
+                      <div key={image.src} className="relative group">
                         <div 
                           className="relative overflow-hidden rounded-lg cursor-pointer transform transition-all duration-300 group-hover:scale-[1.02]"
                           onClick={() => openFullscreenImage(image.src)}

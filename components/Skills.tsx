@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Code, Server, ChevronLeft, ChevronRight, ExternalLink } from 'lucide-react';
+import { Code, Server } from 'lucide-react';
 
 // Définir les types pour les compétences
 interface Skill {
@@ -51,13 +51,6 @@ const SkillsComponent = () => {
     { name: 'Notion', logo: '/logos/notion.png', color: 'text-white', level: 4, description: 'Gestion de projets et documentation' },
     { name: 'CursorAI', logo: '/logos/cursorAi.png', color: 'text-purple-500', level: 4, description: 'Assistance au développement par IA' },
     { name: 'Claude', logo: '/logos/claude.png', color: 'text-purple-500', level: 4, description: 'Génération de code et résolution de problèmes' }
-  ];
-
-  // Projets associés à mes compétences
-  const featuredProjects = [
-    { name: 'Portfolio Personnel', technologies: ['React', 'Next.js', 'Tailwind CSS'], link: '#' },
-    { name: 'Application de Gestion', technologies: ['Vue.js', 'Node.js', 'MongoDB'], link: '#' },
-    { name: 'API REST', technologies: ['Nest.js', 'PostgreSQL', 'TypeScript'], link: '#' }
   ];
 
   // Fonction pour générer les barres de niveau
@@ -121,7 +114,7 @@ const SkillsComponent = () => {
   return (
     <div className="max-w-6xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
       <h2 className="text-4xl font-bold mb-2 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500">Mes Compétences</h2>
-      <p className="text-gray-400 text-center mb-12">Expertise technique et outils que j'utilise quotidiennement</p>
+      <p className="text-gray-400 text-center mb-12">Expertise technique et outils que j&apos;utilise quotidiennement</p>
       
       {/* Section des langages avec tabs */}
       <div className="mb-16 relative">
