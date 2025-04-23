@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Briefcase, GraduationCap, Award, MapPin, Calendar, X, Image as ImageIcon } from 'lucide-react';
+import Image from 'next/image';
 
 interface TimelineItem {
   id: number;
@@ -394,16 +395,18 @@ const About: React.FC = () => {
                     {selectedItem.images.map((image) => (
                       <div key={image.src} className="relative group">
                         <div 
-                          className="relative overflow-hidden rounded-lg cursor-pointer transform transition-all duration-300 group-hover:scale-[1.02]"
+                          className="relative overflow-hidden rounded-lg cursor-pointer transform transition-all duration-300 group-hover:scale-[1.02] h-48"
                           onClick={() => openFullscreenImage(image.src)}
                         >
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center p-3">
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center p-3 z-10">
                             <span className="text-white text-sm">Cliquez pour agrandir</span>
                           </div>
-                          <img 
+                          <Image 
                             src={image.src} 
                             alt={image.alt}
-                            className="w-full h-48 object-cover rounded-lg"
+                            fill
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
+                            className="object-cover rounded-lg"
                           />
                         </div>
                         {image.caption && (
@@ -433,9 +436,11 @@ const About: React.FC = () => {
           </button>
           
           <div className="max-w-[90vw] max-h-[90vh] relative">
-            <img 
+            <Image 
               src={selectedImage} 
               alt="Image en plein écran"
+              width={1200}
+              height={800}
               className="max-w-full max-h-[90vh] object-contain"
             />
           </div>

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { Github, ExternalLink, X, Code, LayoutDashboard, Layers, ChevronLeft, ChevronRight } from 'lucide-react';
+import Image from 'next/image';
 import BackButton from './BackButton';
 
 interface Project {
@@ -43,9 +44,11 @@ const Lightbox: React.FC<LightboxProps> = ({ screenshots, currentIndex, onClose,
       <div className="relative w-full h-full flex items-center justify-center p-4" onClick={(e) => e.stopPropagation()}>
         {/* Image courante */}
         <div className="relative max-w-5xl max-h-[85vh] w-full flex flex-col items-center">
-          <img 
+          <Image 
             src={screenshot.url} 
             alt={screenshot.caption} 
+            width={800}
+            height={500}
             className="max-h-[80vh] max-w-full object-contain rounded-lg shadow-2xl"
           />
           <p className="text-white text-center mt-4 text-lg">{screenshot.caption}</p>
@@ -112,7 +115,7 @@ const Projects: React.FC = () => {
   const projects: Project[] = [
     {
       id: 1,
-      title: "Site Internet Tiki Au bord de l&apos;eau",
+      title: "Site Internet Tiki Au bord de l'eau",
       description: "Un site internet pour un restaurant de cuisine traditionnelle française.",
       tags: ["React", "Nest.js", "PostgreSQL"],
       gradientFrom: "from-blue-500",
@@ -124,7 +127,7 @@ const Projects: React.FC = () => {
         "Authentification des utilisateurs avec JWT",
         "Gestion de réservation en ligne",
         "Interface de connexion",
-        "Interface d&apos;administration complète"
+        "Interface d'administration complète"
       ],
       technologies: [
         "Frontend: Next.js, Tailwind CSS",
@@ -150,14 +153,12 @@ const Projects: React.FC = () => {
     {
       id: 2,
       title: "Area",
-      description: "Site internet permettant l&apos;automatisation de tâches un peu à la n8n",
+      description: "Site internet permettant l'automatisation de tâches un peu à la n8n",
       tags: ["Nuxt.js", "Nest.js", "PostgreSQL"],
       gradientFrom: "from-green-500",
       gradientTo: "to-blue-600",
-      githubUrl: "https://github.com/username/analytics-dashboard",
-      demoUrl: "https://analytics-dashboard-demo.com",
       imageUrl: "/projetArea.png",
-      longDescription: "Site internet permettant l&apos;automatisation de tâches un peu à la n8n",
+      longDescription: "Site internet permettant l'automatisation de tâches un peu à la n8n",
       features: [
         "Graphiques interactifs et personnalisables",
         "Interface de connexion",
@@ -277,7 +278,7 @@ const Projects: React.FC = () => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [lightboxOpen, selectedProject]);
+  }, [lightboxOpen, nextScreenshot, prevScreenshot, closeLightbox]);
 
   // Générer les classes pour la carte de projet
   const getProjectCardClasses = (index: number) => {
@@ -301,10 +302,12 @@ const Projects: React.FC = () => {
             {/* Image ou dégradé du projet */}
             <div className={`h-48 bg-gradient-to-r ${project.gradientFrom} ${project.gradientTo} flex items-center justify-center relative overflow-hidden`}>
               {project.imageUrl ? (
-                <img 
+                <Image 
                   src={project.imageUrl} 
                   alt={project.title} 
-                  className="w-full h-full object-cover absolute inset-0"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  className="object-cover"
                 />
               ) : (
                 <span className="text-2xl font-bold text-white relative z-10">{project.title}</span>
@@ -367,10 +370,12 @@ const Projects: React.FC = () => {
             {/* En-tête avec image */}
             <div className={`h-48 md:h-64 bg-gradient-to-r ${selectedProject.gradientFrom} ${selectedProject.gradientTo} relative overflow-hidden`}>
               {selectedProject.imageUrl && (
-                <img 
+                <Image 
                   src={selectedProject.imageUrl} 
                   alt={selectedProject.title} 
-                  className="w-full h-full object-cover absolute inset-0"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 800px"
+                  className="object-cover"
                 />
               )}
               <div className="absolute inset-0 bg-black/30"></div>
@@ -448,19 +453,21 @@ const Projects: React.FC = () => {
               {/* Captures d'écran */}
               {selectedProject.screenshots && selectedProject.screenshots.length > 0 && (
                 <div className="mb-8">
-                  <h4 className="text-lg font-semibold mb-3">Captures d'écran</h4>
+                  <h4 className="text-lg font-semibold mb-3">Captures d&apos;écran</h4>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    {selectedProject.screenshots.map((screenshot, index) => (
+                    {selectedProject.screenshots.map((screenshot, i) => (
                       <div 
-                        key={index} 
+                        key={i} 
                         className="overflow-hidden rounded-lg cursor-pointer group"
-                        onClick={(e) => openLightbox(index, e)}
+                        onClick={(e) => openLightbox(i, e)}
                       >
-                        <div className="relative">
-                          <img 
+                        <div className="relative h-48">
+                          <Image 
                             src={screenshot.url} 
                             alt={screenshot.caption} 
-                            className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
+                            fill
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                            className="object-cover transition-transform duration-300 group-hover:scale-105"
                           />
                           <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
                             <span className="text-white font-medium bg-black/50 px-3 py-1 rounded-full">

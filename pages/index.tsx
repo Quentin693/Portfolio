@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { User, Phone, FolderOpen, Code, Home } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import Contact from '../components/Contact';
 import About from '../components/About';
 import SkillsComponent from '../components/Skills';
@@ -258,7 +259,7 @@ const EnhancedPortfolio = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-            className="text-xl md:text-3xl font-bold text-center mt-4 h-12 px-4"
+            className="text-5xl md:text-6xl font-bold text-center mt-4 h-12 px-4"
           >
             <span>{typedText}</span>
             <span className={`${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity`}>|</span>
@@ -326,17 +327,13 @@ const EnhancedPortfolio = () => {
             <div className="w-full h-full bg-gradient-to-br from-blue-600 to-purple-700 flex items-center justify-center relative overflow-hidden z-10">
               {/* Image avec effet de zoom au survol */}
               <div className="w-full h-full overflow-hidden absolute inset-0">
-                <img 
-                  src="./Quentin.png" 
+                <Image 
+                  src="/Quentin.png" 
                   alt="Photo de profil" 
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   style={{ objectPosition: "center top" }}
-                  onError={(e) => {
-                    // Fallback en cas de problème avec l'image
-                    e.currentTarget.onerror = null;
-                    // Utiliser une image avec un dégradé bleu comme fallback
-                    e.currentTarget.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='480' viewBox='0 0 320 480'%3E%3Cdefs%3E%3ClinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%233B82F6;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%237C3AED;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='320' height='480' fill='url(%23grad)' /%3E%3Ctext x='160' y='200' font-family='Arial' font-size='50' text-anchor='middle' dominant-baseline='middle' fill='white'%3EQC%3C/text%3E%3C/svg%3E";
-                  }}
+                  width={isMobile ? 180 : 280}
+                  height={isMobile ? 240 : 380}
                 />
               </div>
               
