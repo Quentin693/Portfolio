@@ -54,18 +54,6 @@ const SkillsComponent = () => {
     { name: 'CursorAI', logo: '/logos/cursorAi.png', color: 'text-purple-500', description: 'Assistance au développement par IA' },
   ];
 
-  // Fonction pour générer les barres de niveau
-  const renderLevelBar = (level: number) => {
-    return (
-      <div className="w-full bg-gray-700 rounded-full h-2 mt-1">
-        <div 
-          className="bg-gradient-to-r from-blue-400 to-purple-500 h-2 rounded-full" 
-          style={{ width: `${level * 20}%` }} 
-        />
-      </div>
-    );
-  };
-
   // Fonction pour afficher les skills avec description et niveau
   const renderSkills = (skills: Skill[]) => {
     return (
