@@ -39,7 +39,7 @@ const SkillsComponent = () => {
     ],
     database: [
       { name: 'PostgreSQL', logo: '/logos/PostgresSQL.png', color: 'text-blue-500', level: 4, description: 'Système de gestion de base de données relationnelle' },
-      { name: 'MongoDB', logo: '/logos/mongoDB.png', color: 'text-green-500', level: 4, description: 'Base de données NoSQL orientée documents' },
+      { name: 'MongoDB', logo: '/logos/mongoDB.png', color: 'text-green-500', level: 3, description: 'Base de données NoSQL orientée documents' },
     ]
   };
 
