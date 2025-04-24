@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Send, Phone, Mail, MapPin, Linkedin, Github } from 'lucide-react';
+import { Send, Phone, Mail, MapPin, Linkedin, Github, FileText } from 'lucide-react';
 
 
 interface FormData {
@@ -139,6 +139,21 @@ const Contact: React.FC = () => {
                    aria-label="GitHub"
                 >
                   <Github size={20} />
+                </a>
+                <a href="/CV_Cialone_Quentin.pdf" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   className="bg-blue-500/50 p-3 rounded-full hover:bg-blue-500/70 transition-all cursor-pointer z-10 relative active:bg-blue-600/80 group transform hover:scale-110"
+                   onClick={(e) => {
+                     e.stopPropagation();
+                   }}
+                   download
+                   aria-label="Télécharger mon CV"
+                >
+                  <FileText size={20} className="group-hover:animate-pulse" />
+                  <span className="absolute bottom-full mb-2 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+                    Télécharger mon CV
+                  </span>
                 </a>
               </div>
             </div>

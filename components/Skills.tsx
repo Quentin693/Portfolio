@@ -64,19 +64,20 @@ const SkillsComponent = () => {
             className="bg-gray-800 rounded-lg p-4 transition-all duration-300 transform hover:scale-105 hover:shadow-lg border border-gray-700 hover:border-blue-500"
           >
             <div className="flex items-center mb-3">
-              <div className="h-12 w-12 flex items-center justify-center mr-4 relative">
+              <div className="h-12 w-12 flex items-center justify-center mr-4 relative bg-gray-700/50 rounded-lg overflow-hidden">
                 <Image 
                   src={skill.logo} 
                   alt={skill.name}
                   width={48}
                   height={48}
-                  className="object-contain" 
+                  className="object-contain w-10 h-10" 
                   onError={(e) => {
                     const target = e.currentTarget as HTMLImageElement;
                     target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%232d3748'/%3E%3Ctext x='50' y='50' font-family='Arial' font-size='20' text-anchor='middle' fill='white' dominant-baseline='middle'%3E%3F%3C/text%3E%3C/svg%3E";
                   }}
                 />
               </div>
+              <p className="text-sm text-blue-500">{skill.name}</p>
             </div>
             <p className="text-sm text-gray-400">{skill.description}</p>
           </div>
