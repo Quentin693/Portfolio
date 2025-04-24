@@ -56,6 +56,20 @@ const About: React.FC = () => {
     },
     {
       id: 3,
+      title: "École d'informatique",
+      subtitle: "Epitech",
+      period: "2022 - 2025",
+      location: "Lyon, France",
+      description: "Formation par projets en informatique",
+      type: "education",
+      details: [
+        "Réalisation de plus de 40 projets informatiques",
+        "Spécialisation en développement full-stack",
+        "Membre de la junior entreprise",
+      ],
+    },
+    {
+      id: 4,
       title: "Stage - Développeur Frontend",
       subtitle: "INSA Lyon",
       period: "Septembre 2023 - Décembre 2023",
@@ -85,20 +99,6 @@ const About: React.FC = () => {
           caption: "Interface que j'ai développée pendant mon stage"
         },
       ]
-    },
-    {
-      id: 4,
-      title: "École d'informatique",
-      subtitle: "Epitech",
-      period: "2022 - 2025",
-      location: "Lyon, France",
-      description: "Formation par projets en informatique",
-      type: "education",
-      details: [
-        "Réalisation de plus de 40 projets informatiques",
-        "Spécialisation en développement full-stack",
-        "Membre de la junior entreprise",
-      ],
     },
     {
       id: 5,
