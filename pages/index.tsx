@@ -26,10 +26,10 @@ const EnhancedPortfolio = () => {
   
   const [texts] = useState([
     "Salut, je suis Quentin Cialone",
+    "Je suis né le 22 Juin 2003",
     "Développeur Web Fullstack",
     "Passionné de nouvelles technologies",
-    "Je cherche une alternance",
-    "Je suis né le 22 Juin 2003",
+    "Je cherche une alternance pour Septembre 2025",
   ]);
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [typedText, setTypedText] = useState('');
