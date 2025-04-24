@@ -7,7 +7,6 @@ interface Skill {
   name: string;
   logo: string;
   color: string;
-  level: number;
   description: string;
 }
 
@@ -18,40 +17,41 @@ interface SkillCategories {
 
 const SkillsComponent = () => {
   // État pour suivre quel groupe de compétences est sélectionné
-  const [activeTab, setActiveTab] = useState<'frontend' | 'backend' | 'database'>('frontend');
+  const [activeTab, setActiveTab] = useState<'frontend' | 'backend' | 'database' | 'other'>('frontend');
   
   // Regrouper les langages par catégorie avec niveau de compétence (1-5)
   const skillCategories: SkillCategories = {
     frontend: [
-      { name: 'React', logo: '/logos/react.png', color: 'text-blue-400', level: 5, description: 'Développement d\'interfaces utilisateur complexes et performantes' },
-      { name: 'Vue.js', logo: '/logos/vue.png', color: 'text-green-400', level: 4, description: 'Création d\'applications web progressives' },
-      { name: 'Nuxt.js', logo: '/logos/nuxt.png', color: 'text-green-400', level: 4, description: 'Framework Vue.js pour applications universelles' },
-      { name: 'TypeScript', logo: '/logos/ts.png', color: 'text-blue-600', level: 4, description: 'Typage statique pour JavaScript' },
-      { name: 'Next.js', logo: '/logos/next.png', color: 'text-white', level: 5, description: 'Framework React pour applications avec rendu côté serveur' },
-      { name: 'Tailwind CSS', logo: '/logos/tailwind.png', color: 'text-blue-500', level: 5, description: 'Framework CSS utilitaire pour designs personnalisés' },
+      { name: 'React', logo: '/logos/react.png', color: 'text-blue-400', description: 'Développement d\'interfaces utilisateur complexes et performantes' },
+      { name: 'Vue.js', logo: '/logos/vue.png', color: 'text-green-400', description: 'Création d\'applications web progressives' },
+      { name: 'Nuxt.js', logo: '/logos/nuxt.png', color: 'text-green-400', description: 'Framework Vue.js pour applications universelles' },
+      { name: 'TypeScript', logo: '/logos/ts.png', color: 'text-blue-600', description: 'Typage statique pour JavaScript' },
+      { name: 'Next.js', logo: '/logos/next.png', color: 'text-white', description: 'Framework React pour applications avec rendu côté serveur' },
+      { name: 'Tailwind CSS', logo: '/logos/tailwind.png', color: 'text-blue-500', description: 'Framework CSS utilitaire pour designs personnalisés' },
     ],
     backend: [
-      { name: 'Node.js', logo: '/logos/nodejs.png', color: 'text-green-500', level: 4, description: 'Environnement d\'exécution JavaScript côté serveur' },
-      { name: 'Nest.js', logo: '/logos/nestjs.png', color: 'text-red-500', level: 3, description: 'Framework Node.js progressif pour applications côté serveur' },
-      { name: 'C', logo: '/logos/langageC.png', color: 'text-blue-500', level: 3, description: 'Programmation système et embarquée' },
-      { name: 'C++', logo: '/logos/langageCpp.png', color: 'text-blue-500', level: 3, description: 'Développement de logiciels performants' },
-      { name: 'Python', logo: '/logos/python.png', color: 'text-yellow-500', level: 4, description: 'Automatisation, traitement de données et scripts' },
+      { name: 'Node.js', logo: '/logos/nodejs.png', color: 'text-green-500', description: 'Environnement d\'exécution JavaScript côté serveur' },
+      { name: 'Nest.js', logo: '/logos/nestjs.png', color: 'text-red-500', description: 'Framework Node.js progressif pour applications côté serveur' },
+      { name: 'Python', logo: '/logos/python.png', color: 'text-yellow-500', description: 'Automatisation, traitement de données et scripts' },
     ],
     database: [
-      { name: 'PostgreSQL', logo: '/logos/PostgresSQL.png', color: 'text-blue-500', level: 4, description: 'Système de gestion de base de données relationnelle' },
-      { name: 'MongoDB', logo: '/logos/mongoDB.png', color: 'text-green-500', level: 3, description: 'Base de données NoSQL orientée documents' },
+      { name: 'PostgreSQL', logo: '/logos/PostgresSQL.png', color: 'text-blue-500', description: 'Système de gestion de base de données relationnelle' },
+      { name: 'MongoDB', logo: '/logos/mongoDB.png', color: 'text-green-500', description: 'Base de données NoSQL orientée documents' },
+    ],
+    other: [
+      { name: 'C', logo: '/logos/langageC.png', color: 'text-blue-500', description: 'Programmation système et embarquée' },
+      { name: 'C++', logo: '/logos/langageCpp.png', color: 'text-blue-500', description: 'Développement de logiciels performants' },
     ]
   };
 
   // Outils avec niveau de compétence
   const tools: Skill[] = [
-    { name: 'VSCode', logo: '/logos/vscode.png', color: 'text-blue-500', level: 5, description: 'Éditeur de code principal' },
-    { name: 'GitHub', logo: '/logos/github.png', color: 'text-white', level: 5, description: 'Gestion de versions et collaboration' },
-    { name: 'Docker', logo: '/logos/docker.png', color: 'text-blue-500', level: 3, description: 'Containerisation d\'applications' },
-    { name: 'Figma', logo: '/logos/figma.png', color: 'text-purple-500', level: 4, description: 'Design d\'interfaces et prototypage' },
-    { name: 'Notion', logo: '/logos/notion.png', color: 'text-white', level: 4, description: 'Gestion de projets et documentation' },
-    { name: 'CursorAI', logo: '/logos/cursorAi.png', color: 'text-purple-500', level: 4, description: 'Assistance au développement par IA' },
-    { name: 'Claude', logo: '/logos/claude.png', color: 'text-purple-500', level: 4, description: 'Génération de code et résolution de problèmes' }
+    { name: 'VSCode', logo: '/logos/vscode.png', color: 'text-blue-500', description: 'Éditeur de code principal' },
+    { name: 'GitHub', logo: '/logos/github.png', color: 'text-white', description: 'Gestion de versions et collaboration' },
+    { name: 'Docker', logo: '/logos/docker.png', color: 'text-blue-500', description: 'Containerisation d\'applications' },
+    { name: 'Figma', logo: '/logos/figma.png', color: 'text-purple-500', description: 'Design d\'interfaces et prototypage' },
+    { name: 'Notion', logo: '/logos/notion.png', color: 'text-white', description: 'Gestion de projets et documentation' },
+    { name: 'CursorAI', logo: '/logos/cursorAi.png', color: 'text-purple-500', description: 'Assistance au développement par IA' },
   ];
 
   // Fonction pour générer les barres de niveau
@@ -89,10 +89,6 @@ const SkillsComponent = () => {
                   }}
                 />
               </div>
-              <div className="flex-1">
-                <h4 className={`font-semibold ${skill.color}`}>{skill.name}</h4>
-                {renderLevelBar(skill.level)}
-              </div>
             </div>
             <p className="text-sm text-gray-400">{skill.description}</p>
           </div>
@@ -105,11 +101,12 @@ const SkillsComponent = () => {
   const tabs = [
     { id: 'frontend' as const, label: 'Frontend', icon: <Code size={16} /> },
     { id: 'backend' as const, label: 'Backend', icon: <Server size={16} /> },
-    { id: 'database' as const, label: 'Bases de données', icon: <Server size={16} /> }
+    { id: 'database' as const, label: 'Bases de données', icon: <Server size={16} /> },
+    { id: 'other' as const, label: 'Autres', icon: <Server size={16} /> }
   ];
 
   // Fonction de changement d'onglet
-  const handleTabChange = (tabId: 'frontend' | 'backend' | 'database') => {
+  const handleTabChange = (tabId: 'frontend' | 'backend' | 'database' | 'other') => {
     setActiveTab(tabId);
   };
 

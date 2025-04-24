@@ -460,14 +460,14 @@ const EnhancedPortfolio = () => {
       </section>
       
       {/* Séparateur stylé entre Home et About */}
-      <div className="relative h-12 md:h-24 section-separator">
+      <div className="relative h-16 md:h-24 section-separator">
         <div className="absolute w-full h-full overflow-hidden">
           <div className="container mx-auto h-full relative">
             <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent top-1/2 transform -translate-y-1/2"></div>
             {[...Array(8)].map((_, i) => (
               <div 
                 key={i} 
-                className={`absolute top-1/2 transform -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 rounded-full border-2 border-blue-500 separator-dots ${i % 2 !== 0 && i < 6 ? 'hidden sm:block' : ''}`}
+                className="absolute top-1/2 transform -translate-y-1/2 w-2 h-2 md:w-4 md:h-4 rounded-full border-2 border-blue-500"
                 style={{
                   left: `${(i * 12) + 5}%`,
                   animationDelay: `${i * 0.1}s`,
@@ -488,14 +488,14 @@ const EnhancedPortfolio = () => {
       </section>
       
       {/* Séparateur stylé entre About et Skills */}
-      <div className="relative h-12 md:h-24 section-separator">
+      <div className="relative h-16 md:h-24 section-separator">
         <div className="absolute w-full h-full overflow-hidden">
           <div className="container mx-auto h-full relative">
             <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-green-500 to-transparent top-1/2 transform -translate-y-1/2"></div>
             {[...Array(8)].map((_, i) => (
               <div 
                 key={i} 
-                className={`absolute top-1/2 transform -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 rounded-full border-2 border-green-500 separator-dots ${i % 2 !== 0 && i < 6 ? 'hidden sm:block' : ''}`}
+                className="absolute top-1/2 transform -translate-y-1/2 w-2 h-2 md:w-4 md:h-4 rounded-full border-2 border-green-500"
                 style={{
                   left: `${(i * 12) + 5}%`,
                   animationDelay: `${i * 0.1}s`,
@@ -516,14 +516,14 @@ const EnhancedPortfolio = () => {
       </section>
       
       {/* Séparateur stylé entre Skills et Projects */}
-      <div className="relative h-12 md:h-24 section-separator">
+      <div className="relative h-16 md:h-24 section-separator">
         <div className="absolute w-full h-full overflow-hidden">
           <div className="container mx-auto h-full relative">
             <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-yellow-500 to-transparent top-1/2 transform -translate-y-1/2"></div>
             {[...Array(8)].map((_, i) => (
               <div 
                 key={i} 
-                className={`absolute top-1/2 transform -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 rounded-full border-2 border-yellow-500 separator-dots ${i % 2 !== 0 && i < 6 ? 'hidden sm:block' : ''}`}
+                className="absolute top-1/2 transform -translate-y-1/2 w-2 h-2 md:w-4 md:h-4 rounded-full border-2 border-yellow-500"
                 style={{
                   left: `${(i * 12) + 5}%`,
                   animationDelay: `${i * 0.1}s`,
@@ -544,14 +544,14 @@ const EnhancedPortfolio = () => {
       </section>
       
       {/* Séparateur stylé entre Projects et Contact */}
-      <div className="relative h-12 md:h-24 section-separator">
+      <div className="relative h-16 md:h-24 section-separator">
         <div className="absolute w-full h-full overflow-hidden">
           <div className="container mx-auto h-full relative">
             <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink-500 to-transparent top-1/2 transform -translate-y-1/2"></div>
             {[...Array(8)].map((_, i) => (
               <div 
                 key={i} 
-                className={`absolute top-1/2 transform -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 rounded-full border-2 border-pink-500 separator-dots ${i % 2 !== 0 && i < 6 ? 'hidden sm:block' : ''}`}
+                className="absolute top-1/2 transform -translate-y-1/2 w-2 h-2 md:w-4 md:h-4 rounded-full border-2 border-pink-500"
                 style={{
                   left: `${(i * 12) + 5}%`,
                   animationDelay: `${i * 0.1}s`,
@@ -640,17 +640,13 @@ const EnhancedPortfolio = () => {
 
         /* Media Queries pour mobile */
         @media (max-width: 768px) {
-          .separator-dots {
-            display: none; /* Masquer certains points décoratifs sur mobile */
-          }
-          
           .section-spacing {
             padding-top: 2rem;
             padding-bottom: 2rem;
           }
           
           .section-separator {
-            height: 12px; /* Réduire l'espacement entre sections */
+            height: 16px; /* Réduire l'espacement entre sections mais pas trop */
           }
         }
       `}</style>
