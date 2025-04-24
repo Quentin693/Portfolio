@@ -121,7 +121,7 @@ const Projects: React.FC = () => {
       gradientFrom: "from-blue-500",
       gradientTo: "to-purple-600",
       githubUrl: "",
-      imageUrl: "/projetTiki.png",
+      imageUrl: "/ProjetTiki.png",
       longDescription: "Un site internet pour un restaurant de cuisine traditionnelle française, avec une interface de connexion, une gestion de réservation en ligne, et une interface d&apos;administration.",
       features: [
         "Authentification des utilisateurs avec JWT",

@@ -219,11 +219,11 @@ const EnhancedPortfolio = () => {
       <div className="absolute inset-0 z-0 bg-gradient-to-b from-blue-500/5 to-purple-500/5 mix-blend-overlay" />
       
       {/* Navigation fixe */}
-      <div className="fixed top-4 right-4 z-50 flex flex-col gap-3">
+      <div className="fixed top-4 right-4 z-50 flex flex-col gap-2 sm:gap-3">
         {navOptions.map((option) => (
           <motion.div
             key={option.id}
-            className={`p-3 rounded-full shadow-lg cursor-pointer backdrop-blur-sm flex items-center justify-center group relative ${activeSection === option.id ? 'ring-2 ring-white' : ''}`}
+            className={`p-2 sm:p-3 rounded-full shadow-lg cursor-pointer backdrop-blur-sm flex items-center justify-center group relative ${activeSection === option.id ? 'ring-2 ring-white' : ''}`}
             style={{ 
               backgroundColor: `${option.color}90`,
             }}
@@ -244,14 +244,14 @@ const EnhancedPortfolio = () => {
       </div>
       
       {/* Section d'accueil */}
-      <section id="home" ref={homeRef} className="h-screen w-full flex flex-col relative">
+      <section id="home" ref={homeRef} className="min-h-screen w-full flex flex-col relative pb-8">
         {/* Header */}
-        <header className="relative z-10 w-full py-6 flex flex-col items-center">
+        <header className="relative z-10 w-full py-4 md:py-6 flex flex-col items-center">
           <motion.h1 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-600"
+            className="text-2xl sm:text-3xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-600"
           >
             Mon Portfolio
           </motion.h1>
@@ -259,7 +259,7 @@ const EnhancedPortfolio = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-            className="text-5xl md:text-6xl font-bold text-center mt-4 h-12 px-4"
+            className="text-3xl sm:text-4xl md:text-6xl font-bold text-center mt-4 h-12 px-4"
           >
             <span>{typedText}</span>
             <span className={`${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity`}>|</span>
@@ -283,13 +283,13 @@ const EnhancedPortfolio = () => {
           
           {/* Photo de profil au centre */}
           <motion.div 
-            className="relative md:absolute overflow-hidden z-30 shadow-2xl border-4 border-white/30 cursor-pointer mb-8 md:mb-0 group rounded-3xl"
+            className="relative md:absolute overflow-hidden z-30 shadow-2xl border-4 border-white/30 cursor-pointer mb-6 md:mb-0 group rounded-3xl"
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.8, type: 'spring' }}
             style={{ 
-              width: isMobile ? '180px' : '280px',
-              height: isMobile ? '240px' : '380px',
+              width: isMobile ? '160px' : '280px',
+              height: isMobile ? '220px' : '380px',
               ...(isMobile ? {} : {
                 left: 'calc(50% - 140px)',
                 top: 'calc(50% - 190px)',
@@ -459,14 +459,14 @@ const EnhancedPortfolio = () => {
       </section>
       
       {/* Séparateur stylé entre Home et About */}
-      <div className="relative h-24">
+      <div className="relative h-12 md:h-24 section-separator">
         <div className="absolute w-full h-full overflow-hidden">
           <div className="container mx-auto h-full relative">
             <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent top-1/2 transform -translate-y-1/2"></div>
             {[...Array(8)].map((_, i) => (
               <div 
                 key={i} 
-                className="absolute top-1/2 transform -translate-y-1/2 w-4 h-4 rounded-full border-2 border-blue-500"
+                className={`absolute top-1/2 transform -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 rounded-full border-2 border-blue-500 separator-dots ${i % 2 !== 0 && i < 6 ? 'hidden sm:block' : ''}`}
                 style={{
                   left: `${(i * 12) + 5}%`,
                   animationDelay: `${i * 0.1}s`,
@@ -479,7 +479,7 @@ const EnhancedPortfolio = () => {
       </div>
       
       {/* Section Mon parcours */}
-      <section id="about" ref={aboutRef} className="min-h-screen w-full py-16 px-4 relative">
+      <section id="about" ref={aboutRef} className="min-h-screen w-full py-8 md:py-16 px-4 relative section-spacing">
         <div className="absolute inset-0 bg-gradient-radial from-blue-600/5 to-transparent"></div>
         <div className="container mx-auto">
           <About />
@@ -487,14 +487,14 @@ const EnhancedPortfolio = () => {
       </section>
       
       {/* Séparateur stylé entre About et Skills */}
-      <div className="relative h-24">
+      <div className="relative h-12 md:h-24 section-separator">
         <div className="absolute w-full h-full overflow-hidden">
           <div className="container mx-auto h-full relative">
             <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-green-500 to-transparent top-1/2 transform -translate-y-1/2"></div>
             {[...Array(8)].map((_, i) => (
               <div 
                 key={i} 
-                className="absolute top-1/2 transform -translate-y-1/2 w-4 h-4 rounded-full border-2 border-green-500"
+                className={`absolute top-1/2 transform -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 rounded-full border-2 border-green-500 separator-dots ${i % 2 !== 0 && i < 6 ? 'hidden sm:block' : ''}`}
                 style={{
                   left: `${(i * 12) + 5}%`,
                   animationDelay: `${i * 0.1}s`,
@@ -515,14 +515,14 @@ const EnhancedPortfolio = () => {
       </section>
       
       {/* Séparateur stylé entre Skills et Projects */}
-      <div className="relative h-24">
+      <div className="relative h-12 md:h-24 section-separator">
         <div className="absolute w-full h-full overflow-hidden">
           <div className="container mx-auto h-full relative">
             <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-yellow-500 to-transparent top-1/2 transform -translate-y-1/2"></div>
             {[...Array(8)].map((_, i) => (
               <div 
                 key={i} 
-                className="absolute top-1/2 transform -translate-y-1/2 w-4 h-4 rounded-full border-2 border-yellow-500"
+                className={`absolute top-1/2 transform -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 rounded-full border-2 border-yellow-500 separator-dots ${i % 2 !== 0 && i < 6 ? 'hidden sm:block' : ''}`}
                 style={{
                   left: `${(i * 12) + 5}%`,
                   animationDelay: `${i * 0.1}s`,
@@ -543,14 +543,14 @@ const EnhancedPortfolio = () => {
       </section>
       
       {/* Séparateur stylé entre Projects et Contact */}
-      <div className="relative h-24">
+      <div className="relative h-12 md:h-24 section-separator">
         <div className="absolute w-full h-full overflow-hidden">
           <div className="container mx-auto h-full relative">
             <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-pink-500 to-transparent top-1/2 transform -translate-y-1/2"></div>
             {[...Array(8)].map((_, i) => (
               <div 
                 key={i} 
-                className="absolute top-1/2 transform -translate-y-1/2 w-4 h-4 rounded-full border-2 border-pink-500"
+                className={`absolute top-1/2 transform -translate-y-1/2 w-3 h-3 md:w-4 md:h-4 rounded-full border-2 border-pink-500 separator-dots ${i % 2 !== 0 && i < 6 ? 'hidden sm:block' : ''}`}
                 style={{
                   left: `${(i * 12) + 5}%`,
                   animationDelay: `${i * 0.1}s`,
@@ -635,6 +635,22 @@ const EnhancedPortfolio = () => {
         
         .animate-shine {
           animation: shine 1.5s ease-in-out;
+        }
+
+        /* Media Queries pour mobile */
+        @media (max-width: 768px) {
+          .separator-dots {
+            display: none; /* Masquer certains points décoratifs sur mobile */
+          }
+          
+          .section-spacing {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+          }
+          
+          .section-separator {
+            height: 12px; /* Réduire l'espacement entre sections */
+          }
         }
       `}</style>
     </div>

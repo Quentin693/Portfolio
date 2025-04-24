@@ -24,42 +24,62 @@ const InteractiveBackground: React.FC = () => {
     width: typeof window !== 'undefined' ? window.innerWidth : 1000,
     height: typeof window !== 'undefined' ? window.innerHeight : 800
   });
+  const [isMobile, setIsMobile] = useState(false);
   
   // Configuration des particules
-  const particleConfig = {
-    particleCount: 80,
-    particleBaseSize: 1.5,
-    particleAddedSize: 1.5,
-    particleBaseSpeed: 0.1,
-    particleAddedSpeed: 0.1,
-    particleVariance: 0.5,
-    connectionDistance: 150,
-    maxConnections: 3,
-    baseColor: "#1E40AF",
-    addedColor: "#8B5CF6"
-  };
+  const particleConfig = useCallback(() => {
+    // Réduire le nombre de particules et les paramètres sur mobile pour de meilleures performances
+    return {
+      particleCount: isMobile ? 40 : 80,
+      particleBaseSize: isMobile ? 1 : 1.5,
+      particleAddedSize: isMobile ? 1 : 1.5,
+      particleBaseSpeed: 0.1,
+      particleAddedSpeed: 0.1,
+      particleVariance: 0.5,
+      connectionDistance: isMobile ? 100 : 150, // Distance réduite sur mobile
+      maxConnections: isMobile ? 2 : 3, // Moins de connexions sur mobile
+      baseColor: "#1E40AF",
+      addedColor: "#8B5CF6"
+    };
+  }, [isMobile]);
+  
+  // Détection du mobile
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    // Vérifier à l'initialisation
+    checkIfMobile();
+    
+    // Ajouter un écouteur pour vérifier lors du redimensionnement
+    window.addEventListener('resize', checkIfMobile);
+    
+    return () => window.removeEventListener('resize', checkIfMobile);
+  }, []);
   
   // Fonction pour initialiser les particules
   const initialiseParticles = useCallback(() => {
     if (!canvasRef.current) return;
     
+    const config = particleConfig();
     const newParticles: Particle[] = [];
     const { width, height } = canvasSize;
     
-    for (let i = 0; i < particleConfig.particleCount; i++) {
+    for (let i = 0; i < config.particleCount; i++) {
       // Position aléatoire dans le canvas
       const x = Math.random() * width;
       const y = Math.random() * height;
       
       // Vitesse aléatoire (légère)
-      const vx = (Math.random() - 0.5) * (particleConfig.particleBaseSpeed + Math.random() * particleConfig.particleAddedSpeed);
-      const vy = (Math.random() - 0.5) * (particleConfig.particleBaseSpeed + Math.random() * particleConfig.particleAddedSpeed);
+      const vx = (Math.random() - 0.5) * (config.particleBaseSpeed + Math.random() * config.particleAddedSpeed);
+      const vy = (Math.random() - 0.5) * (config.particleBaseSpeed + Math.random() * config.particleAddedSpeed);
       
       // Taille aléatoire
-      const size = particleConfig.particleBaseSize + Math.random() * particleConfig.particleAddedSize;
+      const size = config.particleBaseSize + Math.random() * config.particleAddedSize;
       
       // Couleur avec variation légère
-      const colorVariation = Math.random() * particleConfig.particleVariance;
+      const colorVariation = Math.random() * config.particleVariance;
       const color = i % 2 === 0 
         ? `rgba(30, 64, 175, ${0.2 + colorVariation})` // Basé sur baseColor
         : `rgba(139, 92, 246, ${0.2 + colorVariation})`; // Basé sur addedColor
@@ -76,11 +96,12 @@ const InteractiveBackground: React.FC = () => {
     }
     
     setParticles(newParticles);
-  }, [canvasSize, particleConfig.particleCount, particleConfig.particleBaseSize, particleConfig.particleAddedSize, particleConfig.particleBaseSpeed, particleConfig.particleAddedSpeed, particleConfig.particleVariance]);
+  }, [canvasSize, particleConfig]);
   
   // Fonction pour connecter les particules entre elles
   const connectParticles = useCallback((particle: Particle, ctx: CanvasRenderingContext2D) => {
     particle.connections = 0;
+    const config = particleConfig();
     
     for (let i = 0; i < particles.length; i++) {
       const otherParticle = particles[i];
@@ -89,7 +110,7 @@ const InteractiveBackground: React.FC = () => {
       if (particle === otherParticle) continue;
       
       // Limiter le nombre de connexions par particule
-      if (particle.connections >= particleConfig.maxConnections) break;
+      if (particle.connections >= config.maxConnections) break;
       
       // Calculer la distance entre les particules
       const dx = particle.x - otherParticle.x;
@@ -97,21 +118,21 @@ const InteractiveBackground: React.FC = () => {
       const distance = Math.sqrt(dx * dx + dy * dy);
       
       // Si la distance est inférieure à la limite, connecter les particules
-      if (distance < particleConfig.connectionDistance) {
+      if (distance < config.connectionDistance) {
         // Opacité basée sur la distance
-        const opacity = 1 - (distance / particleConfig.connectionDistance);
+        const opacity = 1 - (distance / config.connectionDistance);
         
         ctx.beginPath();
         ctx.moveTo(particle.x, particle.y);
         ctx.lineTo(otherParticle.x, otherParticle.y);
         ctx.strokeStyle = `rgba(99, 102, 241, ${opacity * 0.2})`;
-        ctx.lineWidth = 1;
+        ctx.lineWidth = isMobile ? 0.5 : 1; // Lignes plus fines sur mobile
         ctx.stroke();
         
         particle.connections++;
       }
     }
-  }, [particles, particleConfig.maxConnections, particleConfig.connectionDistance]);
+  }, [particles, particleConfig, isMobile]);
   
   // Initialisation et gestion du redimensionnement
   useEffect(() => {
@@ -131,14 +152,16 @@ const InteractiveBackground: React.FC = () => {
     // Ajouter un écouteur d'événement de redimensionnement
     window.addEventListener('resize', handleResize);
     
-    // Initialiser les particules
-    initialiseParticles();
-    
     // Nettoyer l'écouteur d'événement lors du démontage
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [initialiseParticles]);
+  }, []);
+
+  // Réinitialiser les particules lors du changement de taille ou de mode (mobile/desktop)
+  useEffect(() => {
+    initialiseParticles();
+  }, [initialiseParticles, isMobile, canvasSize]);
 
   // Animation des particules
   useEffect(() => {
@@ -151,6 +174,7 @@ const InteractiveBackground: React.FC = () => {
     
     // Fonction d'animation
     let animationFrameId: number;
+    const config = particleConfig();
     
     const render = () => {
       if (!ctx) return;
@@ -194,7 +218,7 @@ const InteractiveBackground: React.FC = () => {
     return () => {
       cancelAnimationFrame(animationFrameId);
     };
-  }, [particles, canvasSize, connectParticles]);
+  }, [particles, canvasSize, connectParticles, particleConfig]);
 
   return (
     <canvas
