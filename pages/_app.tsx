@@ -9,8 +9,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Portfolio 3D Interactif</title>
-        <meta name="description" content="Portfolio créatif et interactif en 3D avec Next.js, Three.js et Tailwind CSS" />
+        <title>Portfolio Cialone Quentin</title>
+        <meta name="description" content="Portfolio créatif et interactif Quentin Cialone" />
       </Head>
       <main className={inter.className}>
         <Component {...pageProps} />
