@@ -174,7 +174,6 @@ const InteractiveBackground: React.FC = () => {
     
     // Fonction d'animation
     let animationFrameId: number;
-    const config = particleConfig();
     
     const render = () => {
       if (!ctx) return;
